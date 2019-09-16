@@ -1,7 +1,7 @@
 const container = document.getElementById('container');
 const colorful = document.getElementById('colorful');
 const greyscale = document.getElementById('greyscale');
-const changeSize = document.getElementById('changeSize');
+const changeSizeBtn = document.getElementById('changeSize');
 
 let rows = 16;
 
@@ -36,9 +36,14 @@ function addColorBox(allSquares) {
   });
 }
 
-changeSize.addEventListener('click', () => {
-  let size = prompt('How many squares across would you like?');
-  rows = size;
+changeSizeBtn.addEventListener('click', function changeSize() {
+  let size = prompt('How many squares across would you like? (1-100)');
+  if (size < 1 || size > 100 || isNaN(size)) {
+    alert('Invalid Number. Please try again.');
+    changeSize();
+  } else {
+    rows = size;
+  }
   removePaintingBox();
   createPaintingBox(rows);
   getSquares();
